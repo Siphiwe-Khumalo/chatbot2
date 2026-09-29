@@ -1,0 +1,22 @@
+# Render Blueprint - one-click deploy for the Business Knowledge AI Bot.
+# In Render: New + -> Blueprint -> connect this repo. Render reads this file.
+#
+# This app is fully local: it needs NO AI API and NO API key.
+services:
+  - type: web
+    name: business-chatbot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      # Optional retrieval tuning (defaults are baked into the code).
+      - key: TOP_K
+        value: "4"
+      - key: SIMILARITY_THRESHOLD
+        value: "0.10"
+      # Optional login. Leave unset for a public demo, or set both to require sign-in.
+      - key: APP_USERNAME
+        sync: false
+      - key: APP_PASSWORD
+        sync: false
